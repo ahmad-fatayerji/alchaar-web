@@ -194,6 +194,7 @@ h1 {
   font-weight: 500;
   color: #1f2f2d;
   text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .is-closed {
@@ -220,6 +221,7 @@ h1 {
 .contact-list li span:first-child {
   font-size: 0.9rem;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .contact-list li span:last-child {
@@ -234,6 +236,16 @@ h1 {
 }
 
 @media (max-width: 860px) {
+  .wip-page {
+    padding: 1rem;
+  }
+
+  .wip-card {
+    border-radius: 18px;
+    padding: 1rem;
+    gap: 0.9rem;
+  }
+
   .wip-logo {
     width: min(360px, 78vw);
     height: 84px;
@@ -246,9 +258,52 @@ h1 {
   .hours-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.35rem;
   }
 
   .time-text {
     text-align: left;
+  }
+}
+
+@media (max-width: 560px) {
+  .ramadan-banner {
+    font-size: 0.86rem;
+    padding: 0.52rem 0.7rem;
+  }
+
+  .logo-row {
+    gap: 0.6rem;
+  }
+
+  .wip-logo {
+    width: min(300px, 86vw);
+    height: 72px;
+  }
+
+  .construction-chip {
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    padding: 0.45rem 0.55rem;
+  }
+
+  h1 {
+    font-size: clamp(1.2rem, 6.3vw, 1.45rem);
+  }
+
+  .headline-wrap .arabic {
+    font-size: clamp(0.92rem, 4.6vw, 1.05rem);
+  }
+
+  .info-card {
+    padding: 0.75rem;
+  }
+
+  .day-text,
+  .time-text,
+  .contact-list li span:first-child {
+    font-size: 0.86rem;
   }
 }

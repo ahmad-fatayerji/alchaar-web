@@ -118,7 +118,7 @@ export default function Home() {
                 <span>Landline: +961 1 633 222</span>
               </li>
               <li>
-                <span>Mobile & WhatsApp: +961 81 94 81 81</span>
+                <span>Mobile (with WhatsApp): +961 81 94 81 81</span>
               </li>
               <li>
                 <span>Email: contact@alchaarpharmacy.com</span>
