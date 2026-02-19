@@ -115,13 +115,16 @@ export default function Home() {
             </div>
             <ul className="contact-list">
               <li>
-                <span>Landline: +961 1 633 222</span>
+                <span className="contact-label">Landline</span>
+                <span className="contact-value">+961 1 633 222</span>
               </li>
               <li>
-                <span>Mobile (with WhatsApp): +961 81 94 81 81</span>
+                <span className="contact-label">Mobile (with WhatsApp)</span>
+                <span className="contact-value">+961 81 94 81 81</span>
               </li>
               <li>
-                <span>Email: contact@alchaarpharmacy.com</span>
+                <span className="contact-label">Email</span>
+                <span className="contact-value">contact@alchaarpharmacy.com</span>
                 <span className="arabic" dir="rtl" lang="ar">
                   البريد: contact@alchaarpharmacy.com
                 </span>
