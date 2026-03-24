@@ -103,7 +103,8 @@ body {
 
 .construction-chip {
   width: fit-content;
-  margin: 0;
+  justify-self: center;
+  margin: 0 auto;
   padding: 0.45rem 0.78rem;
   border-radius: 10px;
   font-size: 0.82rem;

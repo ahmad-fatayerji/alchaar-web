@@ -29,7 +29,7 @@ const openingHours: HoursRow[] = [
   },
   {
     dayEn: "Saturday",
-    hoursEn: "9:00 AM - 9:00 PM",
+    hoursEn: "9:00 AM - 7:00 PM",
   },
   {
     dayEn: "Sunday",
@@ -44,13 +44,6 @@ export default function Home() {
       <div className="wip-background" aria-hidden="true" />
 
       <section className="wip-card">
-        <p className="festive-banner">
-          Eid al-Fitr Mubarak |{" "}
-          <span className="arabic" lang="ar" dir="rtl">
-            عيد فطر مبارك
-          </span>
-        </p>
-
         <div className="logo-row">
           <Image
             src="/chaar-logo-english.svg"
@@ -75,12 +68,6 @@ export default function Home() {
             Website Under Construction |{" "}
             <span className="arabic" lang="ar" dir="rtl">
               الموقع تحت الإنشاء
-            </span>
-          </p>
-          <p className="closure-alert">
-            Friday & Saturday, March 20-21: Closed exceptionally |{" "}
-            <span className="arabic" lang="ar" dir="rtl">
-              الجمعة والسبت 20-21 آذار: مغلقون استثنائياً
             </span>
           </p>
           <h1>Our new website is launching soon</h1>
