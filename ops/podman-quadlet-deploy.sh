@@ -19,3 +19,6 @@ cp -f ops/quadlet/*.container "$HOME/.config/containers/systemd/"
 systemctl --user daemon-reload
 systemctl --user restart "$UNIT_NAME"
 systemctl --user --no-pager --full status "$UNIT_NAME"
+
+# Keep recent images for rollback while removing stale, unused build layers.
+podman image prune --all --force --filter until=168h
