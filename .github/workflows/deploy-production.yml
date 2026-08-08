@@ -2,7 +2,7 @@ name: Deploy production
 
 on:
   push:
-    branches: [staging]
+    branches: [prod]
   workflow_dispatch:
 
 concurrency:
@@ -30,8 +30,12 @@ jobs:
               exit 1
             fi
 
+            cd "$APP_DIR"
+            git config --global --add safe.directory "$APP_DIR" || true
+            git fetch origin +refs/heads/prod:refs/remotes/origin/prod
+            git checkout --force -B prod origin/prod
             mkdir -p "$APP_DIR/shared"
             touch "$APP_DIR/shared/.env.production"
             chmod 600 "$APP_DIR/shared/.env.production"
             chmod +x "$APP_DIR/ops/podman-quadlet-deploy.sh"
-            APP_DIR="$APP_DIR" BRANCH=staging "$APP_DIR/ops/podman-quadlet-deploy.sh"
+            APP_DIR="$APP_DIR" BRANCH=prod "$APP_DIR/ops/podman-quadlet-deploy.sh"

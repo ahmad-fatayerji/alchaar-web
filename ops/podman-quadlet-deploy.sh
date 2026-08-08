@@ -2,14 +2,13 @@
 set -euo pipefail
 
 APP_DIR="${APP_DIR:-/opt/alchaar-web}"
-BRANCH="${BRANCH:-staging}"
+BRANCH="${BRANCH:-prod}"
 UNIT_NAME="alchaar-web"
 
 cd "$APP_DIR"
 git config --global --add safe.directory "$APP_DIR" || true
-git fetch origin "$BRANCH"
-git checkout --force "$BRANCH"
-git reset --hard "origin/$BRANCH"
+git fetch origin "+refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
+git checkout --force -B "$BRANCH" "origin/$BRANCH"
 
 podman build --tag localhost/alchaar-web:latest .
 
