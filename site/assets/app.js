@@ -141,9 +141,15 @@
   var hours = $("[data-hours]");
   if (hours) {
     var today = new Date().getDay();
-    hours.innerHTML = HOURS.map(function (d, i) {
-      var when = d.open == null ? "Closed" : fmt(d.open) + " — " + fmt(d.close);
-      return '<li data-today="' + (i === today) + '">' +
+    // HOURS is indexed by getDay() (0 = Sunday) so the status logic stays
+    // simple, but the list reads Monday first the way the week is actually
+    // kept here — otherwise the single closed day leads it.
+    var WEEK = [1, 2, 3, 4, 5, 6, 0];
+    hours.innerHTML = WEEK.map(function (i) {
+      var d = HOURS[i];
+      var closed = d.open == null;
+      var when = closed ? "Closed" : fmt(d.open) + " — " + fmt(d.close);
+      return '<li data-today="' + (i === today) + '" data-closed="' + closed + '">' +
              '<span class="day">' + d.label + "</span><span>" + when + "</span></li>";
     }).join("");
   }

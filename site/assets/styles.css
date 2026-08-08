@@ -176,7 +176,9 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
    states the positioning — nothing is drawn to stand in for it. */
 .logo { display: inline-flex; align-items: center; }
 .logo__img { width: auto; height: 2.4rem; display: block; }
-.logo__img--footer { height: 6.5rem; }
+/* The slogan lockup ran ~7rem tall and pushed the blurb out of the column,
+   so the footer takes the plain mark and sets the slogan as type. */
+.logo__img--footer { height: 3.1rem; }
 /* The lockup is green + #4A4F54; on the ink footer the grey word would sink,
    so the whole mark is knocked out to white. */
 .logo--light .logo__img { filter: brightness(0) invert(1); }
@@ -446,6 +448,9 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 .hours .day { font-family: var(--meas); font-size: var(--t-meas); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-45); }
 .dark .hours .day, .field .hours .day { color: var(--on-field-dim); }
 .hours li[data-today="true"] { font-weight: 700; }
+.hours li[data-closed="true"] span:last-child { color: var(--chaar-gray); }
+.dark .hours li[data-closed="true"] span:last-child,
+.field .hours li[data-closed="true"] span:last-child { color: var(--on-field-dim); }
 .hours li[data-today="true"] .day { color: var(--chaar-green-deep); }
 .dark .hours li[data-today="true"] .day, .field .hours li[data-today="true"] .day { color: #fff; }
 
@@ -633,7 +638,14 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 .footer li + li { margin-top: 0.55rem; }
 .footer a { font-size: 0.9375rem; color: rgba(255,255,255,0.75); transition: color var(--dur) var(--ease); }
 .footer a:hover { color: #fff; }
-.footer__blurb { font-size: 0.9375rem; color: rgba(255,255,255,0.62); max-width: 34ch; margin-top: 1.1rem; }
+.footer__slogan {
+  margin-top: 0.85rem;
+  font-size: 0.8125rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  /* #008454 measures 3.4:1 on --ink; this mint clears 9:1. */
+  color: #7fd3ae;
+}
+.footer__blurb { font-size: 0.9375rem; color: rgba(255,255,255,0.72); max-width: 34ch; margin-top: 0.9rem; }
 .footer__bottom { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; justify-content: space-between; padding-top: 1.75rem; font-family: var(--face); font-size: 0.75rem; font-weight: 550; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 @media (max-width: 880px) { .footer__top { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .footer__top { grid-template-columns: 1fr; gap: 2rem; } }
