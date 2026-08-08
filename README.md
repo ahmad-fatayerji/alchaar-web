@@ -16,6 +16,28 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### Docker Compose (development)
+
+Run the development server in Docker with live source mounting:
+
+```bash
+docker compose up --build
+```
+
+The application is available at [http://localhost:3000](http://localhost:3000). Stop it with `docker compose down`.
+
+## Production deployment
+
+Pushing to `staging` runs the production deployment workflow. It connects using the existing `SSH_HOST`, `SSH_USER`, and `SSH_PRIVATE_KEY` GitHub repository secrets, then builds and starts the application through a rootless Podman Quadlet.
+
+Before the first deployment, clone this repository at `/opt/alchaar-web` on the production host as the SSH user, install Podman with user systemd support, and enable that user's lingering session:
+
+```bash
+sudo loginctl enable-linger <ssh-user>
+```
+
+The app listens on port 3000. Configure the host reverse proxy to forward production traffic to that port. Add application environment variables to `/opt/alchaar-web/shared/.env.production`; the file is mounted read-only into the container and is never committed.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

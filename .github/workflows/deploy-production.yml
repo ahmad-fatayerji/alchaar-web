@@ -1,0 +1,37 @@
+name: Deploy production
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+concurrency:
+  group: alchaar-web-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy with Podman Quadlet
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            APP_DIR=/opt/alchaar-web
+
+            if [ ! -d "$APP_DIR/.git" ]; then
+              echo "ERROR: $APP_DIR is missing a git checkout. Clone the repository there once before deploying."
+              exit 1
+            fi
+
+            mkdir -p "$APP_DIR/shared"
+            touch "$APP_DIR/shared/.env.production"
+            chmod 600 "$APP_DIR/shared/.env.production"
+            chmod +x "$APP_DIR/ops/podman-quadlet-deploy.sh"
+            APP_DIR="$APP_DIR" BRANCH=staging "$APP_DIR/ops/podman-quadlet-deploy.sh"
