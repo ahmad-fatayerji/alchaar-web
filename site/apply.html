@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Apply — Chaar Pharmacy</title>
+<meta name="description" content="Apply for a role at Chaar Pharmacy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="assets/brand/mark-circle.svg" type="image/svg+xml">
+</head>
+<body>
+<!--
+  DIRECTION CONTRACT · seed aff66747 · The Weighing Station
+  THESIS: The pharmacy as calibrated instrument. This is a per-role application slip,
+  reached only from a role, and it refuses the generic one-form-for-everything careers page.
+  OWN-WORLD: Grey-green chassis, #008454 as field, engraved rules, index marks, Archivo
+  Expanded faceplate, Martian Mono on measured values only. Rules, never boxes; the form
+  is a ruled worksheet.
+  STORY: An applicant who pressed Apply on one role lands on that role's own slip, sees
+  which role it is without re-selecting it, and sends one application.
+  FIRST VIEWPORT: Green field carrying the role name as the headline, its reference on
+  the rule, and the first fields already reachable.
+  FORM: The Weighing Station, position 3 of my ordered list, seed key aff66747.
+  NOTE: the graduation spine was removed at the client's request; the rule motif
+  survives in the tare line and section rules.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<header class="header" data-header>
+  <div class="wrap header__inner">
+    <a class="logo" href="index.html" aria-label="Chaar Pharmacy, home"><img class="logo__img" src="assets/brand/logo-en.svg" alt="Chaar Pharmacy" width="112" height="45"></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Dispensary</a>
+      <a href="about.html">About</a>
+      <a href="team.html">The bench</a>
+      <a href="careers.html" aria-current="page">Careers</a>
+    </nav>
+    <div class="header__end">
+      <span class="readout" data-status>
+        <span class="readout__key label">Counter</span>
+        <span class="readout__val">Checking</span>
+      </span>
+      <a class="btn btn--primary" href="careers.html#roles">All roles</a>
+      <button class="burger" data-burger aria-expanded="false" aria-controls="mnav" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mnav" data-mobile-nav>
+    <a href="index.html">Dispensary</a>
+    <a href="about.html">About</a>
+    <a href="team.html">The bench</a>
+    <a href="careers.html" aria-current="page">Careers</a>
+    <a class="btn btn--primary" href="careers.html#roles">All roles</a>
+    <span class="readout" data-status style="margin-top:1.25rem">
+      <span class="readout__key label">Counter</span>
+      <span class="readout__val">Checking</span>
+    </span>
+  </div>
+</header>
+
+<main id="main" data-apply>
+
+  <!-- Head: the role this slip belongs to, filled from the query string. -->
+  <section class="phero field">
+    <div class="wrap">
+      <p class="crumbs label">
+        <a href="careers.html">Careers</a> / <a href="careers.html#roles">Open roles</a> / Apply
+      </p>
+      <div class="phero__grid">
+        <h1 class="h1 plate" data-role-title>Application</h1>
+        <div>
+          <p class="lede" data-role-blurb>Loading the role.</p>
+          <p class="readout" style="margin-top:1.25rem">
+            <span class="readout__key label">Reference</span>
+            <span class="readout__val" data-role-ref>—</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shown only when the query string names a role we do not publish. -->
+  <section class="section section--tight" data-role-unknown hidden>
+    <div class="wrap">
+      <div class="callout">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5v4M8 11h.01" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>That role is not open at the moment, so this has been switched to an open
+              application. <a class="tlink" href="careers.html#roles">See the roles we are hiring</a></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide split--top">
+        <div data-reveal>
+          <h2 class="h2 plate">What happens next</h2>
+          <ul class="checks">
+            <li>
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="1.8"/></svg>
+              <span>Wassim or Rabih reads it. There is no applicant tracking system here.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="1.8"/></svg>
+              <span>You hear back either way, including when the answer is no.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="1.8"/></svg>
+              <span>Licences are verified before interview, never before.</span>
+            </li>
+          </ul>
+
+          <div class="mt-lg">
+            <span class="label">Applying for</span>
+            <p class="h3" style="margin-top:.4rem" data-role-echo>—</p>
+            <a class="tlink" href="careers.html#roles" style="margin-top:.6rem">Apply for a different role instead</a>
+          </div>
+
+          <div class="callout callout--plain mt-lg">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5v4M8 11h.01" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>This form has no backend connected yet. Submitting validates your entries
+                  and clears the form; nothing is transmitted or stored.</span>
+          </div>
+        </div>
+
+        <form class="form" data-form novalidate data-reveal>
+          <!-- Carries the role through with the submission. -->
+          <input type="hidden" name="role" data-role-field value="">
+
+          <div class="form__row">
+            <div class="field-group">
+              <label for="f-name">Full name</label>
+              <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="As it appears on your licence">
+              <span class="err" data-err="name" role="alert"></span>
+            </div>
+            <div class="field-group">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" required autocomplete="email" placeholder="name@example.com">
+              <span class="err" data-err="email" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="field-group">
+              <label for="f-phone">Telephone</label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Optional">
+              <span class="err" data-err="phone" role="alert"></span>
+            </div>
+            <div class="field-group">
+              <label for="f-licence" data-licence-label>Licence number</label>
+              <input id="f-licence" name="licence" type="text" placeholder="Optional">
+              <span class="err" data-err="licence" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="f-exp" data-exp-label>Relevant experience</label>
+            <textarea id="f-exp" name="experience" required placeholder="Two or three sentences is enough."></textarea>
+            <span class="err" data-err="experience" role="alert"></span>
+          </div>
+
+          <div class="field-group">
+            <label for="f-cv">Curriculum vitae</label>
+            <div class="file" data-file>
+              <input id="f-cv" name="cv" type="file" required
+                     accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+              <label class="file__btn" for="f-cv">Choose file</label>
+              <span class="file__name" data-file-name>No file chosen</span>
+              <button class="file__clear" type="button" data-file-clear hidden aria-label="Remove the chosen file">Remove</button>
+            </div>
+            <span class="hint">PDF or Word, up to 8&nbsp;MB.</span>
+            <span class="err" data-err="cv" role="alert"></span>
+          </div>
+
+          <div class="field-group">
+            <label for="f-start">Earliest start</label>
+            <input id="f-start" name="start" type="text" placeholder="Optional — e.g. immediately, or one month's notice">
+            <span class="err" data-err="start" role="alert"></span>
+          </div>
+
+          <label class="consent">
+            <input type="checkbox" name="consent" required>
+            <span>I consent to Chaar Pharmacy holding these details for the purpose of this
+                  application.</span>
+          </label>
+          <span class="err" data-err="consent" role="alert"></span>
+
+          <div class="btn-row">
+            <button class="btn btn--primary" type="submit">
+              Send application
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+          <p class="form__status" data-form-status role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <a class="logo logo--light" href="index.html"><img class="logo__img logo__img--footer" src="assets/brand/logo-en-slogan.svg" alt="Chaar Pharmacy — we care since 1950" width="150" height="112"></a>
+        <p class="footer__blurb">A single-branch pharmacy in Lebanon that prepares compounded
+           formulations on the premises.</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Dispensary</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="team.html">The bench</a></li>
+          <li><a href="careers.html">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>At the counter</h4>
+        <ul>
+          <li><a href="about.html">How we work</a></li>
+          <li><a href="team.html">The bench</a></li>
+          <li><a href="index.html#visit">Hours and address</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+9611633222">+961 1 633 222</a></li>
+          <li><a href="tel:+96181948181">+961 81 94 81 81</a></li>
+          <li><a href="mailto:contact@alchaarpharmacy.com">contact@alchaarpharmacy.com</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Chaar+Pharmacy+%D9%85%D9%82%D8%A7%D8%A8%D9%84+%D8%AC%D8%A7%D9%85%D8%B9+%D8%B9%D8%AB%D9%85%D8%A7%D9%86+%D8%A8%D9%86+%D8%B9%D9%81%D9%91%D8%A7%D9%86+%D8%B1%D8%B6%D9%8A+%D8%A7%D9%84%D9%84%D9%87+%D8%B9%D9%86%D9%87%D8%8C+%D9%85%D9%84%D8%A7%D8%B5%D9%82+%D9%84%D9%85%D8%AE%D8%AA%D8%A8%D8%B1%D8%A7%D8%AA+%D8%B3%D9%8A%D9%85%D8%A7%D8%8C+%D9%82%D8%A8%D9%84+%D8%B4%D9%83%D8%B1%D9%8A+%D8%AD%D9%85%D8%A7%D8%B5%D9%86%D9%8A%D8%8C+%D8%A7%D9%88%D8%AA%D9%88%D8%B3%D8%AA%D8%B1%D8%A7%D8%AF+%D8%A8%D8%B4%D8%A7%D8%B1%D8%A9+%D8%A7%D9%84%D8%AE%D9%88%D8%B1%D9%8A%D8%8C+%D8%A8%D9%8A%D8%B1%D9%88%D8%AA" target="_blank" rel="noopener">Bechara El Khoury, Beirut</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> Chaar Pharmacy</span>
+      <span>We care since 1950</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
