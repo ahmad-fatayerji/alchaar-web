@@ -17,5 +17,6 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 mkdir -p "$HOME/.config/containers/systemd"
 cp -f ops/quadlet/*.container "$HOME/.config/containers/systemd/"
 systemctl --user daemon-reload
+systemctl --user enable "$UNIT_NAME"
 systemctl --user restart "$UNIT_NAME"
 systemctl --user --no-pager --full status "$UNIT_NAME"
