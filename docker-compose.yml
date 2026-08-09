@@ -1,16 +1,9 @@
 services:
   web:
-    build:
-      context: .
-      target: development
+    build: .
     ports:
       - "3000:3000"
+    # live-reload the static files without rebuilding the image
     volumes:
-      - .:/app
-      - node_modules:/app/node_modules
-    environment:
-      WATCHPACK_POLLING: "true"
+      - ./site:/usr/share/nginx/html:ro
     init: true
-
-volumes:
-  node_modules:
