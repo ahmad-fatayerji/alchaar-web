@@ -22,7 +22,9 @@ const martianMono = Martian_Mono({
   display: "swap",
 });
 
+/* Canonical domain assumed as alchaarpharmacy.com — confirm before launch. */
 export const metadata: Metadata = {
+  metadataBase: new URL("https://alchaarpharmacy.com"),
   title: {
     default: "Chaar Pharmacy — Compounded on the premises",
     template: "%s — Chaar Pharmacy",
@@ -30,19 +32,31 @@ export const metadata: Metadata = {
   description:
     "Chaar Pharmacy prepares compounded formulations in-house. Wassim Chaar and Rabih Chaar make the preparation themselves, to the dose your prescriber wrote.",
   icons: { icon: "/icon.svg" },
+  openGraph: {
+    type: "website",
+    siteName: "Chaar Pharmacy",
+    title: "Chaar Pharmacy — Compounded on the premises",
+    description:
+      "Compounded formulations prepared in-house in Beirut. Wassim Chaar and Rabih Chaar make the preparation themselves, to the dose your prescriber wrote.",
+    images: ["/brand/og-image.png"],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    // The font variables live on <html>: --face and --meas are custom
+    // properties computed at :root, so the next/font variables must already
+    // exist there — on <body> they resolve too late and type falls back.
+    <html lang="en" className={`${archivo.variable} ${martianMono.variable}`}>
       <head>
         {/* Arms the reveal hiding rule before first paint, and only where an
             observer exists to take it off again. */}
         <script dangerouslySetInnerHTML={{ __html: REVEAL_BOOTSTRAP }} />
       </head>
-      <body className={`${archivo.variable} ${martianMono.variable}`}>
+      <body>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
