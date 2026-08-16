@@ -12,14 +12,80 @@ import {
   PHONE_LANDLINE,
   PHONE_LANDLINE_TEL,
   PHONE_MOBILE,
-  PHONE_MOBILE_TEL,
+  WHATSAPP,
+  WHATSAPP_PRESCRIPTION,
 } from "@/lib/site";
-import circles from "@/public/brand/circles.svg";
 import mark from "@/public/brand/mark.svg";
+
+/* The four entries are the confirmed operating scope from PRODUCT.md: doses
+   and forms that manufactured stock does not cover. Nothing here is an
+   invented claim. */
+const MONOGRAPH = [
+  {
+    meas: "Dose",
+    title: "Paediatric and fractional strengths",
+    body: "When the strength your prescriber wrote sits between two manufactured tablets, the preparation is made at the strength written, not the nearest one.",
+    val: "as written",
+  },
+  {
+    meas: "Excipient",
+    title: "Allergen and excipient exclusions",
+    body: "Lactose, gluten, a dye, a preservative — when the excipient is the thing your body refuses, the formulation is prepared without it.",
+    val: "0 mg",
+  },
+  {
+    meas: "Supply",
+    title: "Discontinued formulations",
+    body: "A medicine withdrawn from manufacture is not a medicine that stopped working. Where the active ingredient is available, it is prepared again.",
+    val: "to record",
+  },
+  {
+    meas: "Form",
+    title: "Alternate delivery forms",
+    body: "A capsule that has to become a suspension, a tablet that has to become a topical. The form changes; the dose does not.",
+    val: "same dose",
+  },
+];
+
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Pharmacy",
+  name: "Chaar Pharmacy",
+  url: "https://alchaarpharmacy.com/",
+  slogan: "we care since 1950",
+  telephone: PHONE_LANDLINE_TEL,
+  email: EMAIL,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress:
+      "Bechara El Khoury Highway, opposite Othman bin Affan Mosque, adjacent to Cima Laboratories",
+    addressLocality: "Beirut",
+    addressCountry: "LB",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "21:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "09:00",
+      closes: "19:00",
+    },
+  ],
+  hasMap: MAP_SEARCH,
+};
 
 export default function Home() {
   return (
     <main id="main">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
       {/* ============ HERO ============ */}
       <section className="hero field">
         <div className="wrap">
@@ -81,11 +147,12 @@ export default function Home() {
               data-load
               style={{ "--d": "400ms" } as React.CSSProperties}
             >
-              {/* The brand's own mixing-circles graphic: trituration drawn as
-                  concentric rings. Real brand material, not a placeholder. */}
+              {/* The brand's own mark: the C as a mortar and pestle. Real brand
+                  material, not a placeholder; swapped in for the mixing circles
+                  at the client's request. */}
               <Image
                 className="hero__circles"
-                src={circles}
+                src={mark}
                 alt=""
                 aria-hidden="true"
                 width={406}
@@ -161,6 +228,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ============ THE MONOGRAPH ============
+          What the bench prepares, set as pharmacopoeia rows on the .mono
+          component. */}
+      <section className="section">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <div>
+              <h2 className="h2 plate">What the bench prepares</h2>
+              <p>
+                The preparations manufactured stock does not cover. Bring the
+                prescription; if it can be compounded, it is compounded here.
+              </p>
+            </div>
+            <Link className="tlink" href="/about">
+              How we work
+              <ArrowIcon size={14} />
+            </Link>
+          </div>
+
+          <div className="mono">
+            {MONOGRAPH.map((row) => (
+              <div className="mono__row" data-reveal key={row.meas}>
+                <span className="meas">{row.meas}</span>
+                <h3>{row.title}</h3>
+                <p>{row.body}</p>
+                <span className="mono__val">{row.val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ============ VISIT ============ */}
       <section className="section" id="visit">
         <div className="wrap">
@@ -189,8 +288,31 @@ export default function Home() {
                     <a href={`tel:${PHONE_LANDLINE_TEL}`}>{PHONE_LANDLINE}</a>
                   </p>
                   <p style={{ marginTop: ".5rem" }}>
-                    <a className="tlink" href={`tel:${PHONE_MOBILE_TEL}`}>
+                    <a
+                      className="tlink"
+                      href={WHATSAPP}
+                      target="_blank"
+                      rel="noopener"
+                    >
                       {PHONE_MOBILE} — mobile &amp; WhatsApp
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <span className="label">Prescription</span>
+                  <p style={{ marginTop: ".35rem" }}>
+                    Photograph the prescription and send it ahead; we will tell
+                    you whether it can be prepared and how long it needs.
+                  </p>
+                  <p style={{ marginTop: ".5rem" }}>
+                    <a
+                      className="tlink"
+                      href={WHATSAPP_PRESCRIPTION}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Send it on WhatsApp
+                      <ArrowIcon size={14} />
                     </a>
                   </p>
                 </div>
@@ -263,12 +385,17 @@ export default function Home() {
             nobody else could fill.
           </h2>
           <div className="btn-row" data-reveal>
-            <Link className="btn btn--light" href="#visit">
-              Visit the counter
+            <a
+              className="btn btn--light"
+              href={WHATSAPP_PRESCRIPTION}
+              target="_blank"
+              rel="noopener"
+            >
+              Send it on WhatsApp
               <ArrowIcon />
-            </Link>
-            <Link className="btn btn--onfield" href="/careers">
-              Work at the bench
+            </a>
+            <Link className="btn btn--onfield" href="#visit">
+              Visit the counter
             </Link>
           </div>
         </div>

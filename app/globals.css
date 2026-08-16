@@ -1,8 +1,8 @@
 /* ==========================================================================
    CHAAR PHARMACY — "The Weighing Station"
    One stylesheet, every route. The two font families are supplied by
-   next/font as --font-archivo and --font-martian-mono rather than by a
-   Google Fonts <link>. See docs/DESIGN.md for what governs this file.
+   next/font as --font-archivo and --font-martian-mono rather than by
+   vendored font files. See docs/DESIGN.md for what governs this file.
 
    The world is an analytical balance: engraved faceplate, graduation rules,
    index marks, lit readouts. Green is not an accent here — it owns whole
@@ -74,7 +74,15 @@ body {
   background: var(--ground);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  accent-color: var(--chaar-green);
 }
+
+p { text-wrap: pretty; }
+
+/* Selection carries the field colour — the instrument's own highlight. */
+::selection { background: var(--chaar-green); color: #fff; }
+.field ::selection, .field-deep ::selection { background: #fff; color: var(--chaar-green-deep); }
+.dark ::selection { background: #7fd3ae; color: var(--ink); }
 
 img, svg, video { display: block; max-width: 100%; height: auto; }
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -200,12 +208,17 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 
 .header__end { display: flex; align-items: center; gap: 0.85rem; }
 
-.burger { display: none; width: 2.6rem; height: 2.6rem; border: 1px solid var(--rule); background: transparent; cursor: pointer; place-items: center; }
-.burger span { display: block; width: 15px; height: 1.5px; background: var(--ink); transition: transform 280ms var(--ease), opacity 200ms var(--ease); }
-.burger span + span { margin-top: 4px; }
-.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
-.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+/* No box around it — two clean rules that cross into an X, drawn at the same
+   weight as the site's other icons. */
+.burger {
+  display: none; flex-direction: column; justify-content: center; align-items: center;
+  gap: 7px; width: 2.75rem; height: 2.75rem;
+  border: 0; padding: 0; background: transparent; cursor: pointer;
+}
+.burger span { display: block; width: 24px; height: 2px; background: var(--ink); transition: transform 300ms var(--ease), opacity 200ms var(--ease); }
+.burger span:nth-child(2) { display: none; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-4.5px) rotate(-45deg); }
 
 .mobile-nav { display: none; border-top: 1px solid var(--rule); background: var(--ground); padding: 0.5rem var(--gut) 2rem; }
 .mobile-nav[data-open="true"] { display: block; }
@@ -217,10 +230,13 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 }
 .mobile-nav a[aria-current="page"] { color: var(--chaar-green-deep); }
 .mobile-nav .btn { margin-top: 1.5rem; width: 100%; justify-content: center; }
-@media (max-width: 900px) { .nav, .header__end .btn { display: none; } .burger { display: grid; } }
+@media (max-width: 900px) { .nav, .header__end .btn { display: none; } .burger { display: flex; } }
 /* The counter readout costs the logo its line at phone widths; it reappears
    in the mobile menu's own context instead. */
-@media (max-width: 600px) { .header__end .readout { display: none; } }
+/* The live reading stays in the header at phone widths — it is the one thing
+   a patient checks before walking over. Only the "Counter" key is dropped;
+   the value ("Closed today", "Open until 9pm") speaks for itself. */
+@media (max-width: 600px) { .header__end .readout .readout__key { display: none; } }
 
 /* ---------- 7. Readout (live open / closed) ----------
    An instrument reports state; it does not pulse for attention. */
@@ -254,6 +270,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 }
 .btn svg { flex: none; width: 1rem; height: 1rem; transition: transform var(--dur) var(--ease); }
 .btn:hover svg { transform: translateX(3px); }
+/* The press reads as contact: a fast settle, then the hover lift returns on release. */
+.btn:active { transform: translateY(0.5px) scale(0.99); transition-duration: 90ms; }
 
 .btn--primary { background: var(--chaar-green); color: #fff; box-shadow: 0 6px 18px -10px rgba(0,132,84,0.9); }
 .btn--primary:hover { background: var(--chaar-green-deep); transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(0,132,84,0.9); }
@@ -300,24 +318,34 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 .tare__names b { font-weight: 700; font-size: 0.9375rem; }
 .tare__names span { color: var(--on-field-dim); font-size: 0.9375rem; }
 
-.hero__side { padding-bottom: 0; display: grid; gap: 1.25rem; justify-items: stretch; align-content: end; }
+.hero__side { padding-bottom: 0; display: grid; gap: 1.25rem; justify-items: stretch; align-content: center; align-self: stretch; }
 .hero__frame { aspect-ratio: 3 / 4; width: 100%; overflow: hidden; }
 
-/* Mixing circles, knocked to white and turning slowly — the graphic is a
-   mixing motion, so it moves like one. */
+/* The mortar-and-pestle mark, knocked to white. Unlike the mixing circles it
+   is not radially symmetric, so it holds still — the identity is the claim.
+   Sized as a seal, not a mural: centred in the column's emptiness, seated
+   toward the right edge. */
 .hero__circles {
-  width: 100%; height: auto; max-width: 30rem;
+  width: 100%; height: auto; max-width: 18rem;
   justify-self: end;
+  margin-right: calc(var(--gut) * -0.35);
   filter: brightness(0) invert(1);
   opacity: 0.9;
-  animation: stir 90s linear infinite;
 }
-@media (prefers-reduced-motion: reduce) { .hero__circles { animation: none; } }
-@keyframes stir { to { transform: rotate(360deg); } }
 @media (max-width: 900px) {
   .hero__grid { display: flex; flex-direction: column; align-items: stretch; }
   .hero__frame { aspect-ratio: 16 / 10; }
-  .hero__side { padding-bottom: 0; }
+  /* On small screens the mark stops being a column of its own: it sits to the
+     right of the text as a quiet watermark, the close band's own treatment,
+     and costs the page no height at all. */
+  .hero__side { position: absolute; inset: 0; z-index: 0; display: block; pointer-events: none; padding: 0; }
+  .hero__copy { position: relative; z-index: 1; }
+  .hero__circles {
+    position: absolute; top: 50%; right: -9%;
+    transform: translateY(-50%);
+    width: clamp(11rem, 36vw, 17rem); max-width: none;
+    margin: 0; opacity: 0.16;
+  }
 }
 
 /* ---------- 10. Placeholders ----------
@@ -371,7 +399,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 .dark .mono__row:hover, .field .mono__row:hover { border-bottom-color: #fff; }
 .mono__row p { color: var(--ink-70); font-size: 0.9375rem; }
 .dark .mono__row p, .field .mono__row p { color: var(--on-field); }
-.mono__val { text-align: right; font-family: var(--meas); font-size: 0.8125rem; font-weight: 600; color: var(--chaar-green-deep); font-variant-numeric: tabular-nums; }
+.mono__val { text-align: right; font-family: var(--meas); font-size: 0.8125rem; font-weight: 600; color: var(--chaar-green-deep); font-variant-numeric: tabular-nums; transition: color var(--dur) var(--ease); }
+.mono__row:hover .mono__val { color: var(--chaar-green); }
 .dark .mono__val, .field .mono__val { color: #fff; }
 @media (max-width: 860px) {
   .mono__row { grid-template-columns: 1fr auto; gap: 0.5rem 1rem; }
@@ -445,7 +474,9 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 /* ---------- 17. Hours ---------- */
 .hours { border-top: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
 .dark .hours, .field .hours { border-top-color: rgba(255,255,255,0.22); }
-.hours li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--rule-soft); font-size: 0.9375rem; }
+.hours li { position: relative; display: flex; justify-content: space-between; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--rule-soft); font-size: 0.9375rem; }
+/* Today gets an index blade, the way an instrument points at its reading. */
+.hours li[data-today="true"]::before { content: ""; position: absolute; left: -0.85rem; top: 0; width: 2px; height: 100%; background: var(--chaar-green); }
 .dark .hours li, .field .hours li { border-bottom-color: rgba(255,255,255,0.12); }
 .hours .day { font-family: var(--meas); font-size: var(--t-meas); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-45); }
 .dark .hours .day, .field .hours .day { color: var(--on-field-dim); }
@@ -638,8 +669,11 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 .footer .logo__mark { color: #fff; }
 .footer h4 { font-family: var(--face); font-size: var(--t-meas); letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.72); margin-bottom: 1.1rem; font-weight: 600; }
 .footer li + li { margin-top: 0.55rem; }
-.footer a { font-size: 0.9375rem; color: rgba(255,255,255,0.75); transition: color var(--dur) var(--ease); }
+.footer li a { display: inline-block; font-size: 0.9375rem; color: rgba(255,255,255,0.75); transition: color var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.footer a { color: rgba(255,255,255,0.75); transition: color var(--dur) var(--ease); }
 .footer a:hover { color: #fff; }
+/* The same slide the rows use — one gesture, everywhere a rule is crossed. */
+.footer li a:hover { transform: translateX(4px); }
 .footer__slogan {
   margin-top: 0.85rem;
   font-size: 0.8125rem; font-weight: 600;
@@ -688,6 +722,25 @@ html.reveal-on [data-reveal].is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero [data-load] { opacity: 1; transform: none; animation: none; }
   .tare__rule, .tare__mark { animation: none; clip-path: none; opacity: 1; transform: none; }
+}
+
+/* Cross-page continuity: the chassis (header, footer) holds still while the
+   page's content plates swap. Progressive enhancement — browsers without MPA
+   view transitions get an ordinary navigation. */
+@view-transition { navigation: auto; }
+.header { view-transition-name: site-header; }
+.footer { view-transition-name: site-footer; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 240ms; }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+/* The mixing circles sink slightly as the page scrolls away — the plate is
+   heavier than the type. Scroll-driven, no script, and off with reduced motion. */
+@supports (animation-timeline: scroll()) {
+  .hero__side { animation: heroDrift linear both; animation-timeline: scroll(); animation-range: 0 120vh; }
+  @keyframes heroDrift { to { transform: translateY(72px); } }
+  @media (prefers-reduced-motion: reduce) { .hero__side { animation: none; } }
 }
 
 /* ---------- 27. Utilities ---------- */

@@ -7,11 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import { StatusReadout } from "@/components/status-readout";
 import logoEn from "@/public/brand/logo-en.svg";
 
+/* Careers is deliberately absent: like the application slip, it is reachable
+   only from the team page's "Open roles" button, not from the nav. */
 const NAV = [
   { href: "/", label: "Dispensary" },
   { href: "/about", label: "About" },
   { href: "/team", label: "The bench" },
-  { href: "/careers", label: "Careers" },
 ];
 
 export function SiteHeader() {
@@ -55,9 +56,7 @@ export function SiteHeader() {
     : { href: "/#visit", label: "Visit us" };
 
   const current = (href: string) =>
-    pathname === href || (href === "/careers" && onApply)
-      ? ("page" as const)
-      : undefined;
+    pathname === href ? ("page" as const) : undefined;
 
   return (
     <header className="header" data-stuck={String(stuck)}>

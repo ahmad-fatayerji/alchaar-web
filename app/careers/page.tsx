@@ -4,10 +4,13 @@ import { ArrowIcon } from "@/components/icons";
 import { RoleAccordion } from "@/components/role-accordion";
 import { LISTINGS } from "@/lib/roles";
 
+/* Hidden like the application slip: not indexed, absent from the nav and the
+   footer, reachable only from the team page's "Open roles" button. */
 export const metadata: Metadata = {
   title: "Careers",
   description:
     "Licensed pharmacist and pharmacy technician roles at Chaar Pharmacy, a compounding pharmacy in Lebanon. Apply to work at the bench.",
+  robots: { index: false, follow: false },
 };
 
 /* The sequence carries information here — these are the four things that are

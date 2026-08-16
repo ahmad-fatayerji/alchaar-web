@@ -13,6 +13,14 @@ export const PHONE_MOBILE = "+961 81 94 81 81";
 export const PHONE_MOBILE_TEL = "+96181948181";
 export const EMAIL = "contact@alchaarpharmacy.com";
 
+/* WhatsApp is the channel patients actually use here. The deep link opens a
+   chat with the counter; the prescription variant arrives with its purpose
+   already typed. */
+export const WHATSAPP = `https://wa.me/${PHONE_MOBILE_TEL.replace("+", "")}`;
+export const WHATSAPP_PRESCRIPTION = `${WHATSAPP}?text=${encodeURIComponent(
+  "Hello, I have a prescription I would like compounded.",
+)}`;
+
 /* Keyless Google Maps forms: the address is geocoded by Google, so no
    coordinates are hard-coded here. */
 export const MAP_EMBED =

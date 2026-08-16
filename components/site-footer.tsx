@@ -7,7 +7,7 @@ import {
   PHONE_LANDLINE,
   PHONE_LANDLINE_TEL,
   PHONE_MOBILE,
-  PHONE_MOBILE_TEL,
+  WHATSAPP,
 } from "@/lib/site";
 import logoEn from "@/public/brand/logo-en.svg";
 
@@ -44,9 +44,6 @@ export function SiteFooter() {
               <li>
                 <Link href="/team">The bench</Link>
               </li>
-              <li>
-                <Link href="/careers">Careers</Link>
-              </li>
             </ul>
           </div>
           <div>
@@ -70,7 +67,9 @@ export function SiteFooter() {
                 <a href={`tel:${PHONE_LANDLINE_TEL}`}>{PHONE_LANDLINE}</a>
               </li>
               <li>
-                <a href={`tel:${PHONE_MOBILE_TEL}`}>{PHONE_MOBILE}</a>
+                <a href={WHATSAPP} target="_blank" rel="noopener">
+                  {PHONE_MOBILE} — WhatsApp
+                </a>
               </li>
               <li>
                 <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
