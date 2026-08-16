@@ -108,8 +108,10 @@ export default function About() {
           <div className="values">
             {VALUES.map((v) => (
               <div className="value" key={v.n} data-reveal>
-                <h3 className="h3">{v.title}</h3>
+                {/* Number first: the grid puts the 3.5rem gutter column
+                    leftmost, so the title needs the 1fr column beside it. */}
                 <p className="label">{v.n}</p>
+                <h3 className="h3">{v.title}</h3>
                 <p>{v.body}</p>
               </div>
             ))}

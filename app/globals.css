@@ -121,7 +121,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 .h2 { font-size: var(--t-h2); }
 .h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.018em; font-weight: 700; }
 
-.lede { font-size: clamp(1.0625rem, 1.35vw, 1.3125rem); line-height: 1.5; color: var(--ink-70); max-width: 44ch; }
+.lede { font-size: clamp(1.0625rem, 1.35vw, 1.3125rem); line-height: 1.5; color: var(--ink-70); max-width: 58ch; }
 .prose { max-width: 68ch; color: var(--ink-70); }        /* 65–75ch measure */
 .prose p + p { margin-top: 1.1rem; }
 .field .lede, .field .prose { color: var(--on-field); }
@@ -297,7 +297,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 /* ---------- 9. Hero ----------
    A full-bleed green field. The name sits on a graduation rule as a measured
    value; the tare line names the two pharmacists. */
-.hero { position: relative; overflow: hidden; padding-block: clamp(2.25rem, 4.5vw, 3.5rem) 0; }
+.hero { position: relative; overflow: hidden; padding-block: clamp(2.25rem, 4.5vw, 3.5rem); }
 .hero__grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: end; }
 /* The setup line recedes; the payoff is the brightest thing in the viewport.
    0.7 alpha over #008454 clears 3:1 at display size. */
@@ -374,7 +374,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; }
 
 /* ---------- 11. Section heads ---------- */
 .head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2rem; margin-bottom: clamp(2.25rem, 4vw, 3.5rem); }
-.head p { max-width: 52ch; color: var(--ink-70); margin-top: 1rem; }
+.head p { max-width: 64ch; color: var(--ink-70); margin-top: 1rem; }
 .field .head p, .dark .head p { color: var(--on-field); }
 @media (max-width: 720px) { .head { grid-template-columns: 1fr; align-items: start; } }
 

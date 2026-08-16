@@ -50,7 +50,13 @@ export default function RootLayout({
     // The font variables live on <html>: --face and --meas are custom
     // properties computed at :root, so the next/font variables must already
     // exist there — on <body> they resolve too late and type falls back.
-    <html lang="en" className={`${archivo.variable} ${martianMono.variable}`}>
+    // suppressHydrationWarning: REVEAL_BOOTSTRAP adds `reveal-on` to <html>
+    // before hydration, so the class list is expected to differ from the server's.
+    <html
+      lang="en"
+      className={`${archivo.variable} ${martianMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Arms the reveal hiding rule before first paint, and only where an
             observer exists to take it off again. */}
