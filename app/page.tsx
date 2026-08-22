@@ -105,10 +105,10 @@ export default function Home() {
                 data-load
                 style={{ "--d": "160ms" } as React.CSSProperties}
               >
-                Most pharmacies dispense what a factory already decided. When the
-                dose does not exist, when the excipient is the thing your body
-                refuses, when the strength was discontinued — the preparation has
-                to be made. We make it here, on the premises.
+                Most pharmacies dispense what a factory already decided. When
+                the dose does not exist, when the excipient is the thing your
+                body refuses, when the strength was discontinued — the
+                preparation has to be made. We make it here, on the premises.
               </p>
 
               <div
@@ -268,8 +268,8 @@ export default function Home() {
               <h2 className="h2 plate">Come to the counter</h2>
               <p className="prose mt-lg">
                 One branch, one bench, one set of hours. Bring the prescription,
-                or call ahead if the preparation needs lead time and we will tell
-                you honestly how long.
+                or call ahead if the preparation needs lead time and we will
+                tell you honestly how long.
               </p>
 
               <div className="stack-md mt-lg">
@@ -361,7 +361,7 @@ export default function Home() {
                 className="label"
                 style={{ display: "block", marginTop: "2rem" }}
               >
-                Trading hours
+                Opening hours
               </span>
               <HoursList />
             </div>
