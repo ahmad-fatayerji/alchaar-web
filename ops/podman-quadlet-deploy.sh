@@ -15,7 +15,8 @@ podman build --tag localhost/alchaar-web:latest .
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 mkdir -p "$HOME/.config/containers/systemd"
-cp -f ops/quadlet/*.container "$HOME/.config/containers/systemd/"
+cp -f ops/quadlet/alchaar-web.container \
+  "$HOME/.config/containers/systemd/alchaar-web.container"
 systemctl --user daemon-reload
 systemctl --user restart "$UNIT_NAME"
 systemctl --user --no-pager --full status "$UNIT_NAME"
