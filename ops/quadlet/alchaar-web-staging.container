@@ -1,0 +1,20 @@
+[Unit]
+Description=Alchaar web application (staging)
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=localhost/alchaar-web-staging:latest
+ContainerName=alchaar-web-staging
+PublishPort=127.0.0.1:3001:3000
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=HOSTNAME=0.0.0.0
+Volume=/opt/alchaar-web-staging/shared/.env.production:/app/.env.production:ro,Z
+
+[Service]
+Restart=always
+TimeoutStartSec=120
+
+[Install]
+WantedBy=default.target
