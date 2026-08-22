@@ -23,7 +23,7 @@ jobs:
           script_stop: true
           script: |
             set -euo pipefail
-            APP_DIR=/opt/alchaar-web-staging
+            APP_DIR="$HOME/alchaar-web-staging"
 
             if [ ! -d "$APP_DIR/.git" ]; then
               git clone --branch staging --single-branch \

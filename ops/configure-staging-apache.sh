@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_DIR="${APP_DIR:-/opt/alchaar-web-staging}"
+APP_DIR="${APP_DIR:-$HOME/alchaar-web-staging}"
 SITE_NAME="staging.alchaarpharmacy.com"
 SOURCE="$APP_DIR/ops/apache/$SITE_NAME.conf"
 TARGET="/etc/apache2/sites-available/$SITE_NAME.conf"

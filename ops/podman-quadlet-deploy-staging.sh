@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_DIR="${APP_DIR:-/opt/alchaar-web-staging}"
+APP_DIR="${APP_DIR:-$HOME/alchaar-web-staging}"
 BRANCH="staging"
 UNIT_NAME="alchaar-web-staging"
 
