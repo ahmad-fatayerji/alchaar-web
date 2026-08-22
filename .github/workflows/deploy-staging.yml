@@ -20,7 +20,6 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script_stop: true
           script: |
             set -euo pipefail
             APP_DIR="$HOME/alchaar-web-staging"
@@ -39,12 +38,3 @@ jobs:
             chmod 600 "$APP_DIR/shared/.env.production"
             chmod +x "$APP_DIR/ops/podman-quadlet-deploy-staging.sh"
             APP_DIR="$APP_DIR" "$APP_DIR/ops/podman-quadlet-deploy-staging.sh"
-
-            # Install/update the HTTP reverse proxy when this deploy user has
-            # passwordless sudo. TLS can be issued after DNS has propagated.
-            if sudo -n true 2>/dev/null; then
-              chmod +x "$APP_DIR/ops/configure-staging-apache.sh"
-              "$APP_DIR/ops/configure-staging-apache.sh"
-            else
-              echo "WARNING: Apache staging vhost requires a one-time privileged setup."
-            fi
