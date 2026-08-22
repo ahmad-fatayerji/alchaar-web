@@ -21,13 +21,10 @@ systemctl --user daemon-reload
 systemctl --user restart "$UNIT_NAME"
 systemctl --user --no-pager --full status "$UNIT_NAME"
 
-for attempt in {1..20}; do
-  if curl --fail --silent --show-error http://127.0.0.1:3001/ >/dev/null; then
-    exit 0
-  fi
-  sleep 1
-done
-
-echo "ERROR: staging did not become healthy on 127.0.0.1:3001" >&2
-podman logs --tail 100 alchaar-web-staging >&2 || true
-exit 1
+if ! curl --fail --silent --show-error \
+  --retry 20 --retry-all-errors --retry-delay 1 \
+  http://127.0.0.1:3001/ >/dev/null; then
+  echo "ERROR: staging did not become healthy on 127.0.0.1:3001" >&2
+  podman logs --tail 100 alchaar-web-staging >&2 || true
+  exit 1
+fi
