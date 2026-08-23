@@ -16,14 +16,10 @@ jobs:
     steps:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.2.0
-        env:
-          STAGING_APACHE_CONFIG_B64: ${{ secrets.STAGING_APACHE_CONFIG_B64 }}
-          STAGING_BASIC_AUTH_PASSWORD: ${{ secrets.STAGING_BASIC_AUTH_PASSWORD }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: STAGING_APACHE_CONFIG_B64,STAGING_BASIC_AUTH_PASSWORD
           script: |
             set -euo pipefail
             APP_DIR="$HOME/alchaar-web-staging"
@@ -42,26 +38,3 @@ jobs:
             chmod 600 "$APP_DIR/shared/.env.production"
             chmod +x "$APP_DIR/ops/podman-quadlet-deploy-staging.sh"
             APP_DIR="$APP_DIR" "$APP_DIR/ops/podman-quadlet-deploy-staging.sh"
-
-            sudo -n true
-            CONFIG_TEMP="$(mktemp)"
-            trap 'rm -f "$CONFIG_TEMP"' EXIT
-            printf '%s' "$STAGING_APACHE_CONFIG_B64" | base64 --decode >"$CONFIG_TEMP"
-            printf '%s\n' "$STAGING_BASIC_AUTH_PASSWORD" | \
-              sudo htpasswd -iBc /etc/apache2/.htpasswd-alchaar-staging staging
-            sudo chmod 640 /etc/apache2/.htpasswd-alchaar-staging
-            sudo chown root:www-data /etc/apache2/.htpasswd-alchaar-staging
-            sudo install -o root -g root -m 0644 "$CONFIG_TEMP" \
-              /etc/apache2/sites-available/staging.alchaarpharmacy.com.conf
-            sudo a2enmod proxy proxy_http headers auth_basic authn_file
-            sudo a2ensite staging.alchaarpharmacy.com
-            sudo apache2ctl configtest
-            sudo systemctl reload apache2
-
-            UNAUTH_STATUS="$(curl --silent --output /dev/null --write-out '%{http_code}' \
-              --header 'Host: staging.alchaarpharmacy.com' http://127.0.0.1/)"
-            test "$UNAUTH_STATUS" = "401"
-            AUTH_STATUS="$(curl --silent --output /dev/null --write-out '%{http_code}' \
-              --user "staging:$STAGING_BASIC_AUTH_PASSWORD" \
-              --header 'Host: staging.alchaarpharmacy.com' http://127.0.0.1/)"
-            test "$AUTH_STATUS" = "200"
