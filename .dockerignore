@@ -7,4 +7,5 @@ npm-debug.log*
 Dockerfile
 docker-compose.yml
 ops
+docs
 README.md
